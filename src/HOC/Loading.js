@@ -15,13 +15,13 @@ const Loading = loadingProp => WrappedComponent => {
     componentDidMount() {
       this.startTimer = Date.now();
     }
-    componentWillUpdate(nextProps) {
+    shouldComponentUpdate(nextProps) {
       if (!isEmpty(nextProps[loadingProp])) {
         this.endTimer = Date.now();
       }
+      return true;
     }
     render() {
-      console.log("From loader", this.props);
       const classProps = {
         loadingTime: ((this.endTimer - this.startTimer) / 1000).toFixed(2)
       };

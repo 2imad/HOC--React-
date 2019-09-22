@@ -7,24 +7,43 @@ import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import Feed from "./components/Feed";
 import Container from "@material-ui/core/Container";
 import PhoneImg from "./assets/images/iPhones.png";
+import { ReactComponent as Logo } from "./assets/svg/icon.svg";
 const useStyles = makeStyles(theme => ({
+  wrapper: {
+    position: "relative"
+  },
   grid: {
     width: "100%",
     margin: 0,
     height: "100%"
   },
   text: {
+    zIndex: 1,
     fontFamily: "Montserrat",
     lineHeight: 1.4,
     color: "#91a5b9",
     fontWeight: "bold",
     fontSize: "2.5rem",
-    width: "70%"
+    width: "70%",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      fontSize: "1.5rem"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%",
+      fontSize: "1.5rem"
+    },
+    [theme.breakpoints.up("md")]: {
+      width: "29rem"
+    },
+    [theme.breakpoints.up("lg")]: {
+      width: "34rem"
+    }
   },
   subText: {
+    zIndex: 1,
     color: "#4a4a4a",
     fontFamily: "Montserrat",
     fontSize: "1rem",
@@ -32,7 +51,8 @@ const useStyles = makeStyles(theme => ({
   },
   container: {
     background: "green",
-    padding: 0
+    padding: 0,
+    display: "relative"
   },
   bar: {
     backgroundColor: "#FFF"
@@ -56,7 +76,7 @@ const useStyles = makeStyles(theme => ({
     background: "rgb(229,233,236)",
     background:
       "radial-gradient(circle, rgba(229,233,236,1) 0%, rgba(255,255,255,1) 100%)",
-    height: "50vh"
+    height: "auto"
   },
   innerHeader: {
     display: "flex",
@@ -64,19 +84,28 @@ const useStyles = makeStyles(theme => ({
     height: "100%"
   },
   headerContainer: {
+    zIndex: 1,
     display: "flex",
     flexDirection: "column",
     padding: "2em",
     justifyContent: "center",
-    width: "70%"
+    width: "70%",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+      padding: "1em"
+    },
+    [theme.breakpoints.down("sm")]: {
+      width: "100%"
+    }
   },
   imgElement: {
     width: "34rem",
+    zIndex: 1,
     [theme.breakpoints.down("xs")]: {
-      width: "20rem"
+      width: "18rem"
     },
     [theme.breakpoints.down("sm")]: {
-      width: "23rem"
+      width: "18rem"
     },
     [theme.breakpoints.up("md")]: {
       width: "29rem"
@@ -92,6 +121,11 @@ const useStyles = makeStyles(theme => ({
   },
   imgContainer: {
     alignSelf: "flex-end"
+  },
+  Logo: {
+    position: "absolute",
+    top: "8rem",
+    left: "80px"
   }
 }));
 
@@ -116,7 +150,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <div className={classes.wrapper}>
       <AppBar className={classes.bar} position="static">
         <Toolbar>
           <IconButton
@@ -132,6 +166,7 @@ const App = () => {
           <Button>Login</Button>
         </Toolbar>
       </AppBar>
+      <Logo className={classes.Logo} />
       <Container className={classes.container} maxWidth="xl">
         <Typography component="div" className={classes.jumbotron}>
           <Grid container className={classes.grid} spacing={3}>
@@ -150,15 +185,15 @@ const App = () => {
               </Container>
             </Grid>
             <Grid className={classes.gridContainer} item sm={6}>
-              <img className={classes.imgElement} src={PhoneImg} />
+              <img
+                alt="Iphones"
+                className={classes.imgElement}
+                src={PhoneImg}
+              />
             </Grid>
           </Grid>
         </Typography>
       </Container>
-      <Container maxWidth="lg">
-        <Feed contacts={contacts} />
-      </Container>
-      <div></div>
     </div>
   );
 };
